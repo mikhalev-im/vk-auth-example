@@ -1,0 +1,1 @@
+Example of VK authentication in Node.js
