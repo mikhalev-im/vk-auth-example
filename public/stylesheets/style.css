@@ -1,0 +1,24 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+.btn {
+  padding: 5px;
+}
+
+.btn-login {
+  background-color: #ededed;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.btn-login:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
