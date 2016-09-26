@@ -10,6 +10,10 @@ var users = require('./routes/users');
 
 var app = express();
 
+if (app.get('env') === 'development') {
+  require('dotenv').config();
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -31,9 +35,9 @@ const VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 passport.use(new VKontakteStrategy(
   {
-    clientID:     'VKONTAKTE_APP_ID',
-    clientSecret: 'VKONTAKTE_APP_SECRET',
-    callbackURL:  "http://localhost:3000/auth/vkontakte/callback"
+    clientID:     process.env.VK_CLIENT_ID,
+    clientSecret: process.env.VK_CLIENT_SECRET,
+    callbackURL:  "http://node-vk-auth-example.herokuapp.com/vkontakte/callback"
   },
   function myVerifyCallbackFn(accessToken, refreshToken, profile, done) {
 
