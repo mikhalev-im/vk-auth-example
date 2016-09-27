@@ -6,15 +6,21 @@ const request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // console.log(req.session);
+  if (req.user) {
+    return res.redirect('/profile');
+  }
+
   res.render('index', { title: 'Node.js VK authentication example' });
 });
 
 router.get('/profile', function(req, res, next) {
 
+  if (!req.user) {
+    return res.redirect('/');
+  }
 
   const requestOptions = {
-    url: 'https://api.vk.com/method/friends.get?user_id=4897330&v=5.52&count=5&fields=nickname',
+    url: 'https://api.vk.com/method/friends.get?user_id=' + req.user.id + '&v=5.52&count=5&fields=nickname',
     method: 'GET'
   }
 
@@ -42,6 +48,13 @@ router.get('/vkontakte/callback',
   passport.authenticate('vkontakte', {failureRedirect: '/', session: false}),
   function(req, res) {
     // success
+    req.login(req.user, function(err) {
+      if (err) {
+        // error handling
+        console.log(err);
+      }
+    });
+
     res.redirect('/profile');
   });
 
