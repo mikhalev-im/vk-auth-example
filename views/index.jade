@@ -2,4 +2,5 @@ extends layout
 
 block content
   h1= title
-  button.btn.btn-login Login through VK
+  form(method="GET" action="/vkontakte/login")
+    button.btn.btn-login(type = "submit") Login through VK
