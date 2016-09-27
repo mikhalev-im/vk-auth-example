@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
+var VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -38,9 +40,6 @@ app.use('/', routes);
 app.use('/users', users);
 
 // passport config
-const passport = require('passport');
-const VKontakteStrategy = require('passport-vkontakte').Strategy;
-
 passport.use(new VKontakteStrategy(
   {
     clientID:     process.env.VK_CLIENT_ID,
