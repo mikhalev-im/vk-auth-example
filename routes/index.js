@@ -39,22 +39,15 @@ router.get('/profile', function(req, res, next) {
 });
 
 router.get('/vkontakte/login',
-  passport.authenticate('vkontakte', { session: false }),
+  passport.authenticate('vkontakte'),
   function(req, res, next) {
     // this will not be called
   });
 
 router.get('/vkontakte/callback',
-  passport.authenticate('vkontakte', {failureRedirect: '/', session: false}),
+  passport.authenticate('vkontakte', {failureRedirect: '/'}),
   function(req, res) {
     // success
-    req.login(req.user, function(err) {
-      if (err) {
-        // error handling
-        console.log(err);
-      }
-    });
-
     res.redirect('/profile');
   });
 
