@@ -20,7 +20,7 @@ router.get('/profile', function(req, res, next) {
   }
 
   const requestOptions = {
-    url: 'https://api.vk.com/method/friends.get?user_id=' + req.user.id + '&v=5.52&count=5&fields=nickname',
+    url: 'https://api.vk.com/method/friends.get?user_id=' + req.user.id + '&v=5.52&count=5&fields=nickname&lang=ru',
     method: 'GET'
   }
 
