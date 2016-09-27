@@ -2,5 +2,8 @@ extends layout
 
 block content
   h1= title
+  ul
+    each friend in friends
+      li #{friend}
   form(method="GET" action="/vkontakte/login")
     button.btn.btn-login(type = "submit") Login through VK

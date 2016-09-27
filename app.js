@@ -5,8 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+
+// for passport
 var passport = require('passport');
 var VKontakteStrategy = require('passport-vkontakte').Strategy;
+var User = require('./models/user');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -44,26 +47,30 @@ passport.use(new VKontakteStrategy(
   {
     clientID:     process.env.VK_CLIENT_ID,
     clientSecret: process.env.VK_CLIENT_SECRET,
-    callbackURL:  "http://node-vk-auth-example.herokuapp.com/vkontakte/callback"
+    callbackURL:  app.get('env') === 'development' 
+      ? "http://node-vk-auth-example.herokuapp.com:3000/vkontakte/callback"
+      : "https://node-vk-auth-example.herokuapp.com/vkontakte/callback"
   },
-  function myVerifyCallbackFn(accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
 
-    // Now that we have user's `profile` as seen by VK, we can
-    // use it to find corresponding database records on our side.
-    // Here, we have a hypothetical `User` class which does what it says.
-    const data = {
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-      profile: profile,
-    }
+    User.findOrCreate(profile, function(err, user) {
+      done(null, profile);
+    })
 
-    done(null, data);
-
-    // User.findOrCreate({ vkontakteId: profile.id })
-    //     .then(function (user) { done(null, user) })
-    //     .catch(done);
   }
 ));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
