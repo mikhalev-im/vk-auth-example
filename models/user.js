@@ -12,7 +12,6 @@ function findById(id, cb) {
       break;
     }
   }
-  
 
   cb(null, user);
 }

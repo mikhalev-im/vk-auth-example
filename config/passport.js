@@ -1,4 +1,6 @@
-module.exports = function(env, passport) {
+const passport = require('passport');
+
+module.exports = function(env) {
 
   var VKontakteStrategy = require('passport-vkontakte').Strategy;
   var User = require('../models/user');

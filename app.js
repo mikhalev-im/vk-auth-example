@@ -25,13 +25,17 @@ app.use(expressSession({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    // 1 minute session expiration
+    maxAge: 60000
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // configure passport
-require('./config/passport')(app.get('env'), passport);
+require('./config/passport')(app.get('env'));
 
 app.use('/', routes);
 

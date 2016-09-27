@@ -7,18 +7,44 @@ a {
   color: #00B7FF;
 }
 
-
-.btn {
-  padding: 5px;
+.panel {
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.btn-login {
-  background-color: #ededed;
-  border: 1px solid black;
+.btn {
+  padding: 7px 16px 8px;
+  background-color: #5e81a8;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #6888ad;
+}
+
+.profile {
+  margin: 0 auto;
+  width: 300px;
+  border: 1px solid #e1e4eb;
   border-radius: 3px;
 }
 
-.btn-login:hover {
-  background-color: #ccc;
-  cursor: pointer;
+.profile-header {
+  background-color: #507299;
+  color: #fff;
+  padding: 20px;
+  margin: 0;
+}
+
+.form {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.list-header {
+  padding-left: 20px;
 }
