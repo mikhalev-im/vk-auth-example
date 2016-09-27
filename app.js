@@ -61,11 +61,12 @@ passport.use(new VKontakteStrategy(
 ));
 
 passport.serializeUser(function(user, done) {
+  console.log('CALLED');
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  
+  console.log('CALLED');
   User.findById(id, function(err, user) {
     done(err, user);
   });

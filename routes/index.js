@@ -6,12 +6,15 @@ const request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  // console.log(req.session);
   res.render('index', { title: 'Node.js VK authentication example' });
 });
 
 router.get('/profile', function(req, res, next) {
+
+
   const requestOptions = {
-    url: 'https://api.vk.com/method/friends.get?user_id=4897330&v=5.52&count=5',
+    url: 'https://api.vk.com/method/friends.get?user_id=4897330&v=5.52&count=5&fields=nickname',
     method: 'GET'
   }
 
@@ -22,10 +25,7 @@ router.get('/profile', function(req, res, next) {
     }
 
     body = JSON.parse(body);
-    // console.log(body.response);
     friendsId = body['response']['items'];
-
-    // friendsId = [];
 
     res.render('profile', { title: 'Your VK friends:', friends: friendsId });
   });
