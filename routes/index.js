@@ -51,4 +51,9 @@ router.get('/vkontakte/callback',
     res.redirect('/profile');
   });
 
+router.get('/vkontakte/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
 module.exports = router;

@@ -5,3 +5,5 @@ block content
   ul
     each friend in friends
       li #{friend.first_name + ' '+ friend.last_name}
+  form(method="GET" action="/vkontakte/logout")
+    button.btn.btn-login(type = "submit") Logout
