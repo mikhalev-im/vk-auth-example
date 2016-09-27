@@ -44,9 +44,17 @@ passport.use(new VKontakteStrategy(
     // Now that we have user's `profile` as seen by VK, we can
     // use it to find corresponding database records on our side.
     // Here, we have a hypothetical `User` class which does what it says.
-    User.findOrCreate({ vkontakteId: profile.id })
-        .then(function (user) { done(null, user) })
-        .catch(done);
+    const data = {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      profile: profile,
+    }
+
+    done(null, data);
+
+    // User.findOrCreate({ vkontakteId: profile.id })
+    //     .then(function (user) { done(null, user) })
+    //     .catch(done);
   }
 ));
 
