@@ -6,7 +6,7 @@ const request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'VK authentication example app', friends: [] });
+  res.render('index', { title: 'Node.js VK authentication example' });
 });
 
 router.get('/profile', function(req, res, next) {
@@ -27,7 +27,7 @@ router.get('/profile', function(req, res, next) {
 
     // friendsId = [];
 
-    res.render('index', { title: 'VK Profile page', friends: friendsId });
+    res.render('profile', { title: 'Your VK friends:', friends: friendsId });
   });
   
 });
