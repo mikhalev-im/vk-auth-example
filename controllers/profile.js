@@ -1,4 +1,4 @@
-const request = require('request');
+const ProfileModel = require('../models/profile');
 
 module.exports = function(req, res) {
 
@@ -7,21 +7,14 @@ module.exports = function(req, res) {
     return res.redirect('/');
   }
 
-  const requestOptions = {
-    url: 'https://api.vk.com/method/friends.get?user_id=' + req.user.id + '&v=5.52&count=5&fields=nickname&lang=ru',
-    method: 'GET'
-  }
+  ProfileModel.getFriends(req.user.id, function(err, friendsList) {
 
-  request(requestOptions, function(err, response, body) {
     if (err) {
       // error handling
       console.log(err);
       res.status(500);
       return res.render('error', { message: 'Something went wrong' });
     }
-
-    body = JSON.parse(body);
-    friendsList = body['response']['items'];
 
     res.render('profile', {
       title: 'Ваше имя: ' + req.user.displayName,
